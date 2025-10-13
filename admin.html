@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | LuminaSkin</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#fdf8f6', 100: '#f8ede8', 200: '#f0d9cf', 300: '#e4bbab', 400: '#d49481', 500: '#c6765f', 600: '#b15d47', 700: '#944b3c', 800: '#7a4036', 900: '#65382f' },
+                        cream: '#faf8f5',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+    
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-900 text-white flex-shrink-0">
+            <div class="p-6">
+                <div class="flex items-center space-x-2 mb-8">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-spa text-white"></i>
+                    </div>
+                    <span class="font-serif text-xl font-semibold">LuminaSkin</span>
+                </div>
+                
+                <nav class="space-y-2">
+                    <a href="#dashboard" class="flex items-center gap-3 px-4 py-3 bg-primary-600 rounded-lg">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#products" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-lg transition">
+                        <i class="fas fa-box"></i>
+                        <span>Products</span>
+                    </a>
+                    <a href="#orders" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-lg transition">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Orders</span>
+                    </a>
+                    <a href="#customers" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-lg transition">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </a>
+                    <a href="#analytics" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-lg transition">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="#content" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-lg transition">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Content</span>
+                    </a>
+                    <a href="#settings" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-lg transition">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="absolute bottom-0 w-64 p-6 border-t border-gray-800">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-lg transition">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Store</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+            <!-- Header -->
+            <header class="bg-white border-b px-8 py-6">
+                <div class="flex justify-between items-center">
+                    <h1 class="font-serif text-3xl font-semibold text-gray-900">Dashboard</h1>
+                    <div class="flex items-center gap-4">
+                        <button class="relative text-gray-600 hover:text-gray-900">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-semibold">A</span>
+                            </div>
+                            <span class="font-medium">Admin</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="p-8">
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="stat-card">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <p class="text-white/80 text-sm mb-1">Total Revenue</p>
+                                <p class="text-3xl font-bold">$24,850</p>
+                            </div>
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-dollar-sign text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            <span>12.5% from last month</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card bg-gradient-to-br from-green-600 to-green-700">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <p class="text-white/80 text-sm mb-1">Orders</p>
+                                <p class="text-3xl font-bold">342</p>
+                            </div>
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-shopping-cart text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            <span>8.2% from last month</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card bg-gradient-to-br from-blue-600 to-blue-700">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <p class="text-white/80 text-sm mb-1">Customers</p>
+                                <p class="text-3xl font-bold">1,248</p>
+                            </div>
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-users text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            <span>15.3% from last month</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card bg-gradient-to-br from-purple-600 to-purple-700">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <p class="text-white/80 text-sm mb-1">3D Views</p>
+                                <p class="text-3xl font-bold">5,842</p>
+                            </div>
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-cube text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            <span>24.1% from last month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-6 mb-8">
+                    <!-- Sales Chart -->
+                    <div class="dashboard-card">
+                        <h3 class="font-serif text-xl font-semibold mb-4">Sales Overview</h3>
+                        <canvas id="salesChart" style="height: 300px;"></canvas>
+                    </div>
+
+                    <!-- Top Products -->
+                    <div class="dashboard-card">
+                        <h3 class="font-serif text-xl font-semibold mb-4">Top Products</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=100" class="w-16 h-16 rounded-lg object-cover">
+                                <div class="flex-1">
+                                    <p class="font-semibold">Hydrating Serum</p>
+                                    <p class="text-sm text-gray-600">342 sales</p>
+                                </div>
+                                <span class="font-bold text-green-600">$16,416</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <img src="https://images.unsplash.com/photo-1556228852-80ba42dcf77a?w=100" class="w-16 h-16 rounded-lg object-cover">
+                                <div class="flex-1">
+                                    <p class="font-semibold">Vitamin C Cream</p>
+                                    <p class="text-sm text-gray-600">298 sales</p>
+                                </div>
+                                <span class="font-bold text-green-600">$19,370</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="dashboard-card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-serif text-xl font-semibold">Recent Orders</h3>
+                        <a href="#orders" class="text-primary-600 hover:text-primary-700 font-medium">View All</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Product</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#ORD-1045</td>
+                                    <td>Sarah Johnson</td>
+                                    <td>Hydrating Serum</td>
+                                    <td>$48.00</td>
+                                    <td><span class="badge badge-new">Completed</span></td>
+                                    <td>Oct 12, 2025</td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-1044</td>
+                                    <td>Michael Chen</td>
+                                    <td>Vitamin C Cream</td>
+                                    <td>$65.00</td>
+                                    <td><span class="badge badge-bestseller">Processing</span></td>
+                                    <td>Oct 12, 2025</td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-1043</td>
+                                    <td>Emily Rodriguez</td>
+                                    <td>Retinol Treatment</td>
+                                    <td>$78.00</td>
+                                    <td><span class="badge badge-new">Completed</span></td>
+                                    <td>Oct 11, 2025</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | LuminaSkin</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#fdf8f6', 100: '#f8ede8', 200: '#f0d9cf', 300: '#e4bbab', 400: '#d49481', 500: '#c6765f', 600: '#b15d47', 700: '#944b3c', 800: '#7a4036', 900: '#65382f' },
+                        cream: '#faf8f5',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-cream">
+    
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-spa text-white text-lg"></i>
+                    </div>
+                    <span class="font-serif text-2xl font-semibold text-gray-900">LuminaSkin</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary-600 transition font-medium">Home</a>
+                    <a href="shop.html" class="text-gray-700 hover:text-primary-600 transition font-medium">Shop</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="cartToggle" class="relative text-gray-700 hover:text-primary-600 transition">
+                        <i class="fas fa-shopping-bag text-lg"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-primary-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-md mx-auto">
+                <!-- Login/Register Tabs -->
+                <div class="tabs justify-center mb-8">
+                    <button class="tab active" data-tab="login">Login</button>
+                    <button class="tab" data-tab="register">Register</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm" class="bg-white rounded-2xl p-8 shadow-sm">
+                    <h2 class="font-serif text-3xl font-semibold text-center mb-6">Welcome Back</h2>
+                    
+                    <form onsubmit="handleLogin(event)">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" required class="input-field" placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Password</label>
+                            <input type="password" required class="input-field" placeholder="••••••••">
+                        </div>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span class="text-sm">Remember me</span>
+                            </label>
+                            <a href="#" class="text-sm text-primary-600 hover:text-primary-700">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="w-full btn btn-primary py-3 mb-4">
+                            Sign In
+                        </button>
+                        
+                        <div class="text-center text-sm text-gray-600 mb-4">or continue with</div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" class="btn btn-secondary py-3">
+                                <i class="fab fa-google mr-2"></i> Google
+                            </button>
+                            <button type="button" class="btn btn-secondary py-3">
+                                <i class="fab fa-facebook mr-2"></i> Facebook
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div id="registerForm" class="bg-white rounded-2xl p-8 shadow-sm hidden">
+                    <h2 class="font-serif text-3xl font-semibold text-center mb-6">Create Account</h2>
+                    
+                    <form onsubmit="handleRegister(event)">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Full Name</label>
+                            <input type="text" required class="input-field" placeholder="John Doe">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" required class="input-field" placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Password</label>
+                            <input type="password" required class="input-field" placeholder="••••••••">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Confirm Password</label>
+                            <input type="password" required class="input-field" placeholder="••••••••">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="flex items-start">
+                                <input type="checkbox" required class="mr-2 mt-1">
+                                <span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="w-full btn btn-primary py-3 mb-4">
+                            Create Account
+                        </button>
+                        
+                        <div class="text-center text-sm text-gray-600 mb-4">or sign up with</div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" class="btn btn-secondary py-3">
+                                <i class="fab fa-google mr-2"></i> Google
+                            </button>
+                            <button type="button" class="btn btn-secondary py-3">
+                                <i class="fab fa-facebook mr-2"></i> Facebook
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">&copy; 2025 LuminaSkin. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300">
+        <div class="h-full flex flex-col">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="font-serif text-2xl font-semibold">Shopping Cart</h3>
+                <button id="cartClose" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div id="cartItems" class="flex-1 overflow-y-auto p-6"></div>
+            <div class="p-6 border-t bg-gray-50">
+                <div class="flex justify-between mb-4 text-lg font-semibold">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <a href="cart.html" class="block w-full py-3 bg-gray-900 text-white text-center rounded-lg font-medium hover:bg-gray-800 transition mb-3">
+                    View Cart
+                </a>
+                <a href="checkout.html" class="block w-full py-3 bg-primary-600 text-white text-center rounded-lg font-medium hover:bg-primary-700 transition">
+                    Checkout
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartOverlay" class="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                document.getElementById('loginForm').classList.toggle('hidden', tabName !== 'login');
+                document.getElementById('registerForm').classList.toggle('hidden', tabName !== 'register');
+            });
+        });
+
+        function handleLogin(e) {
+            e.preventDefault();
+            alert('Login functionality would be implemented with backend API.\\n\\nFor demo purposes, you would be redirected to your account dashboard.');
+            // In production: POST to /api/auth/login
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            alert('Registration functionality would be implemented with backend API.\\n\\nFor demo purposes, your account would be created and you would receive a confirmation email.');
+            // In production: POST to /api/auth/register
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover premium skincare products with innovative 3D visualization. Shop serums, creams, cleansers, and more for healthy, radiant skin.">
+    <meta name="keywords" content="skincare, beauty, serum, moisturizer, 3D product viewer, luxury skincare">
+    <title>LuminaSkin - Premium 3D Skincare Experience</title>
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fdf8f6',
+                            100: '#f8ede8',
+                            200: '#f0d9cf',
+                            300: '#e4bbab',
+                            400: '#d49481',
+                            500: '#c6765f',
+                            600: '#b15d47',
+                            700: '#944b3c',
+                            800: '#7a4036',
+                            900: '#65382f',
+                        },
+                        cream: '#faf8f5',
+                        sage: '#b8c5b0',
+                        blush: '#f4e5e0',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.159.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.159.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.159.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body class="bg-cream font-sans text-gray-800">
+    
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-spa text-white text-lg"></i>
+                    </div>
+                    <span class="font-serif text-2xl font-semibold text-gray-900">LuminaSkin</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary-600 transition font-medium">Home</a>
+                    <a href="shop.html" class="text-gray-700 hover:text-primary-600 transition font-medium">Shop</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-primary-600 transition font-medium flex items-center">
+                            Routines <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            <a href="routine-builder.html" class="block px-4 py-3 hover:bg-blush transition">Routine Builder</a>
+                            <a href="my-routines.html" class="block px-4 py-3 hover:bg-blush transition">My Routines</a>
+                        </div>
+                    </div>
+                    <a href="blog.html" class="text-gray-700 hover:text-primary-600 transition font-medium">Blog</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary-600 transition font-medium">About</a>
+                </div>
+                
+                <!-- Right Menu -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search -->
+                    <button id="searchToggle" class="text-gray-700 hover:text-primary-600 transition">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    
+                    <!-- Account -->
+                    <a href="account.html" class="text-gray-700 hover:text-primary-600 transition hidden sm:block">
+                        <i class="fas fa-user text-lg"></i>
+                    </a>
+                    
+                    <!-- Cart -->
+                    <button id="cartToggle" class="relative text-gray-700 hover:text-primary-600 transition">
+                        <i class="fas fa-shopping-bag text-lg"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-primary-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobileMenuToggle" class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-4 space-y-3">
+                <a href="index.html" class="block text-gray-700 hover:text-primary-600 transition py-2">Home</a>
+                <a href="shop.html" class="block text-gray-700 hover:text-primary-600 transition py-2">Shop</a>
+                <a href="routine-builder.html" class="block text-gray-700 hover:text-primary-600 transition py-2">Routine Builder</a>
+                <a href="blog.html" class="block text-gray-700 hover:text-primary-600 transition py-2">Blog</a>
+                <a href="about.html" class="block text-gray-700 hover:text-primary-600 transition py-2">About</a>
+                <a href="account.html" class="block text-gray-700 hover:text-primary-600 transition py-2">Account</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300">
+        <div class="container mx-auto px-4 pt-24">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-2xl p-6">
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-search text-gray-400 text-xl"></i>
+                        <input type="text" id="searchInput" placeholder="Search products, ingredients, concerns..." class="flex-1 text-lg outline-none" autocomplete="off">
+                        <button id="searchClose" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div id="searchResults" class="mt-4 max-h-96 overflow-y-auto"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blush via-white to-cream">
+        <!-- Animated Background -->
+        <div id="heroCanvas" class="absolute inset-0"></div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-10 container mx-auto px-4 text-center">
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-light text-gray-900 mb-6 opacity-0 animate-fade-in">
+                Radiant Skin<br/>
+                <span class="font-semibold text-primary-600">Redefined</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto opacity-0 animate-fade-in-delay">
+                Experience skincare in a new dimension. Explore our scientifically-formulated products with immersive 3D visualization.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-fade-in-delay-2">
+                <a href="shop.html" class="px-8 py-4 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition transform hover:scale-105 shadow-lg hover:shadow-xl">
+                    Explore Products
+                </a>
+                <a href="routine-builder.html" class="px-8 py-4 bg-white text-primary-600 rounded-full font-medium hover:bg-gray-50 transition transform hover:scale-105 shadow-lg hover:shadow-xl">
+                    Build Your Routine
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-gray-400 text-2xl"></i>
+        </div>
+    </section>
+    
+    <!-- Featured Categories -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-serif text-4xl md:text-5xl font-semibold text-gray-900 mb-4">Shop by Category</h2>
+                <p class="text-gray-600 text-lg">Find the perfect products for your skincare needs</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Category 1 -->
+                <a href="shop.html?category=serums" class="group relative overflow-hidden rounded-2xl aspect-square">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-200 to-primary-300"></div>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                        <i class="fas fa-tint text-6xl text-white mb-4 transform group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-serif text-3xl font-semibold text-white mb-2">Serums</h3>
+                        <p class="text-white/90">Targeted treatments for every concern</p>
+                    </div>
+                </a>
+                
+                <!-- Category 2 -->
+                <a href="shop.html?category=moisturizers" class="group relative overflow-hidden rounded-2xl aspect-square">
+                    <div class="absolute inset-0 bg-gradient-to-br from-sage/60 to-sage"></div>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                        <i class="fas fa-seedling text-6xl text-white mb-4 transform group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-serif text-3xl font-semibold text-white mb-2">Moisturizers</h3>
+                        <p class="text-white/90">Hydration for every skin type</p>
+                    </div>
+                </a>
+                
+                <!-- Category 3 -->
+                <a href="shop.html?category=cleansers" class="group relative overflow-hidden rounded-2xl aspect-square">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-200 to-blue-300"></div>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                        <i class="fas fa-water text-6xl text-white mb-4 transform group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-serif text-3xl font-semibold text-white mb-2">Cleansers</h3>
+                        <p class="text-white/90">Gentle purification for radiant skin</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Products -->
+    <section class="py-20 bg-cream">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="font-serif text-4xl md:text-5xl font-semibold text-gray-900 mb-4">Featured Products</h2>
+                    <p class="text-gray-600 text-lg">Experience our bestsellers in 3D</p>
+                </div>
+                <a href="shop.html" class="hidden md:block text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                    View All <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            
+            <div id="featuredProducts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Products will be loaded dynamically -->
+            </div>
+            
+            <div class="text-center mt-12 md:hidden">
+                <a href="shop.html" class="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                    View All Products <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-semibold text-gray-900 mb-4">Why LuminaSkin?</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">We combine cutting-edge science with luxurious formulations to deliver visible results</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-flask text-3xl text-primary-600"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold mb-4">Science-Backed</h3>
+                    <p class="text-gray-600">Every formula is clinically tested and proven effective for visible results</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-sage/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-leaf text-3xl text-green-700"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold mb-4">Clean Ingredients</h3>
+                    <p class="text-gray-600">Formulated without parabens, sulfates, or harmful chemicals</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-cube text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold mb-4">3D Experience</h3>
+                    <p class="text-gray-600">Explore products in immersive 3D before you buy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="py-20 bg-blush">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-semibold text-gray-900 mb-4">Loved by Thousands</h2>
+                <p class="text-gray-600 text-lg">Real results from real customers</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6">"The Vitamin C serum transformed my skin! The 3D viewer helped me understand exactly what I was buying. Love this brand!"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-primary-200 rounded-full flex items-center justify-center mr-4">
+                            <span class="font-semibold text-primary-700">SM</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Sarah M.</p>
+                            <p class="text-sm text-gray-500">Verified Customer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-sm">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6">"Finally, a skincare brand that's transparent about ingredients. The routine builder helped me create the perfect regimen for my sensitive skin."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-sage/30 rounded-full flex items-center justify-center mr-4">
+                            <span class="font-semibold text-green-700">JL</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Jessica L.</p>
+                            <p class="text-sm text-gray-500">Verified Customer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-sm">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6">"Best online shopping experience I've had. Being able to see the product texture and packaging in 3D made me confident in my purchase."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="font-semibold text-blue-700">MK</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Michael K.</p>
+                            <p class="text-sm text-gray-500">Verified Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter -->
+    <section class="py-20 bg-gradient-to-br from-primary-500 to-primary-700 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="font-serif text-4xl md:text-5xl font-semibold mb-4">Join Our Community</h2>
+                <p class="text-lg mb-8 text-white/90">Get exclusive access to new products, skincare tips, and special offers</p>
+                <form id="newsletterForm" class="flex flex-col sm:flex-row gap-4">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-4 rounded-full text-gray-900 outline-none" required>
+                    <button type="submit" class="px-8 py-4 bg-white text-primary-600 rounded-full font-medium hover:bg-gray-100 transition transform hover:scale-105">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-spa text-white"></i>
+                        </div>
+                        <span class="font-serif text-2xl font-semibold">LuminaSkin</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Elevate your skincare routine with science-backed formulations and immersive 3D experiences.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Shop -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Shop</h4>
+                    <ul class="space-y-3">
+                        <li><a href="shop.html?category=serums" class="text-gray-400 hover:text-white transition">Serums</a></li>
+                        <li><a href="shop.html?category=moisturizers" class="text-gray-400 hover:text-white transition">Moisturizers</a></li>
+                        <li><a href="shop.html?category=cleansers" class="text-gray-400 hover:text-white transition">Cleansers</a></li>
+                        <li><a href="shop.html?category=treatments" class="text-gray-400 hover:text-white transition">Treatments</a></li>
+                        <li><a href="shop.html?category=suncare" class="text-gray-400 hover:text-white transition">Sun Care</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Support -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="shipping.html" class="text-gray-400 hover:text-white transition">Shipping & Returns</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="routine-builder.html" class="text-gray-400 hover:text-white transition">Routine Builder</a></li>
+                        <li><a href="ingredients.html" class="text-gray-400 hover:text-white transition">Ingredients Guide</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Company -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="sustainability.html" class="text-gray-400 hover:text-white transition">Sustainability</a></li>
+                        <li><a href="careers.html" class="text-gray-400 hover:text-white transition">Careers</a></li>
+                        <li><a href="press.html" class="text-gray-400 hover:text-white transition">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 LuminaSkin. All rights reserved.</p>
+                <div class="flex space-x-6 text-sm">
+                    <a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
+                    <a href="terms.html" class="text-gray-400 hover:text-white transition">Terms of Service</a>
+                    <a href="cookies.html" class="text-gray-400 hover:text-white transition">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300">
+        <div class="h-full flex flex-col">
+            <!-- Header -->
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="font-serif text-2xl font-semibold">Shopping Cart</h3>
+                <button id="cartClose" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Cart Items -->
+            <div id="cartItems" class="flex-1 overflow-y-auto p-6">
+                <!-- Items will be loaded dynamically -->
+            </div>
+            
+            <!-- Footer -->
+            <div class="p-6 border-t bg-gray-50">
+                <div class="flex justify-between mb-4 text-lg font-semibold">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <a href="cart.html" class="block w-full py-3 bg-gray-900 text-white text-center rounded-lg font-medium hover:bg-gray-800 transition mb-3">
+                    View Cart
+                </a>
+                <a href="checkout.html" class="block w-full py-3 bg-primary-600 text-white text-center rounded-lg font-medium hover:bg-primary-700 transition">
+                    Checkout
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cart Overlay -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300"></div>
+    
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/main.js"></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>

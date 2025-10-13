@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | LuminaSkin</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#fdf8f6', 100: '#f8ede8', 200: '#f0d9cf', 300: '#e4bbab', 400: '#d49481', 500: '#c6765f', 600: '#b15d47', 700: '#944b3c', 800: '#7a4036', 900: '#65382f' },
+                        cream: '#faf8f5',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-cream">
+    
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-spa text-white text-lg"></i>
+                    </div>
+                    <span class="font-serif text-2xl font-semibold text-gray-900">LuminaSkin</span>
+                </a>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="cart.html" class="text-gray-700 hover:text-primary-600 transition">
+                        <i class="fas fa-shopping-bag text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-16">
+        <div class="container mx-auto px-4">
+            <h1 class="font-serif text-4xl font-semibold text-center mb-12">Secure Checkout</h1>
+
+            <!-- Progress Steps -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <div class="progress-steps">
+                    <div class="progress-step active">
+                        <div class="progress-step-circle">1</div>
+                        <span class="text-sm mt-2 font-medium">Shipping</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="progress-step-circle">2</div>
+                        <span class="text-sm mt-2">Payment</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="progress-step-circle">3</div>
+                        <span class="text-sm mt-2">Review</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Checkout Form -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl p-8 shadow-sm">
+                        <h2 class="font-serif text-2xl font-semibold mb-6">Shipping Information</h2>
+                        
+                        <form id="checkoutForm">
+                            <!-- Contact Information -->
+                            <div class="mb-6">
+                                <h3 class="font-semibold mb-4">Contact</h3>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">First Name *</label>
+                                        <input type="text" required class="input-field" placeholder="John">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Last Name *</label>
+                                        <input type="text" required class="input-field" placeholder="Doe">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium mb-2">Email *</label>
+                                <input type="email" required class="input-field" placeholder="john@example.com">
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium mb-2">Phone *</label>
+                                <input type="tel" required class="input-field" placeholder="(555) 123-4567">
+                            </div>
+
+                            <!-- Shipping Address -->
+                            <div class="mb-6 pt-6 border-t">
+                                <h3 class="font-semibold mb-4">Shipping Address</h3>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium mb-2">Address Line 1 *</label>
+                                    <input type="text" required class="input-field" placeholder="123 Main Street">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium mb-2">Address Line 2</label>
+                                    <input type="text" class="input-field" placeholder="Apt 4B (optional)">
+                                </div>
+
+                                <div class="grid md:grid-cols-3 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">City *</label>
+                                        <input type="text" required class="input-field" placeholder="New York">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">State *</label>
+                                        <select required class="input-field">
+                                            <option value="">Select</option>
+                                            <option value="NY">New York</option>
+                                            <option value="CA">California</option>
+                                            <option value="TX">Texas</option>
+                                            <!-- Add more states -->
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">ZIP Code *</label>
+                                        <input type="text" required class="input-field" placeholder="10001">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Shipping Method -->
+                            <div class="mb-6 pt-6 border-t">
+                                <h3 class="font-semibold mb-4">Shipping Method</h3>
+                                <div class="space-y-3">
+                                    <label class="flex items-center justify-between p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-600 transition">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="shipping" value="standard" checked class="mr-3">
+                                            <div>
+                                                <p class="font-medium">Standard Shipping</p>
+                                                <p class="text-sm text-gray-600">5-7 business days</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-semibold">FREE</span>
+                                    </label>
+
+                                    <label class="flex items-center justify-between p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-600 transition">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="shipping" value="express" class="mr-3">
+                                            <div>
+                                                <p class="font-medium">Express Shipping</p>
+                                                <p class="text-sm text-gray-600">2-3 business days</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-semibold">$15.00</span>
+                                    </label>
+
+                                    <label class="flex items-center justify-between p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-600 transition">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="shipping" value="overnight" class="mr-3">
+                                            <div>
+                                                <p class="font-medium">Overnight Shipping</p>
+                                                <p class="text-sm text-gray-600">Next business day</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-semibold">$25.00</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Payment Information -->
+                            <div class="pt-6 border-t">
+                                <h3 class="font-semibold mb-4">Payment Information</h3>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium mb-2">Card Number *</label>
+                                    <input type="text" required class="input-field" placeholder="1234 5678 9012 3456">
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Expiry Date *</label>
+                                        <input type="text" required class="input-field" placeholder="MM/YY">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">CVV *</label>
+                                        <input type="text" required class="input-field" placeholder="123">
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-2 text-sm text-gray-600 bg-blue-50 p-4 rounded-lg">
+                                    <i class="fas fa-lock text-blue-600"></i>
+                                    <span>Your payment information is encrypted and secure</span>
+                                </div>
+                            </div>
+
+                            <button type="button" onclick="placeOrder()" class="w-full btn btn-primary text-lg py-4 mt-6">
+                                <i class="fas fa-lock mr-2"></i>
+                                Place Order
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm sticky top-24">
+                        <h3 class="font-serif text-xl font-semibold mb-6">Order Summary</h3>
+                        
+                        <div id="checkoutItems" class="space-y-4 mb-6 pb-6 border-b">
+                            <!-- Cart items will be loaded here -->
+                        </div>
+
+                        <div class="space-y-3 mb-6 pb-6 border-b">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Subtotal</span>
+                                <span id="checkoutSubtotal" class="font-semibold">$0.00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Shipping</span>
+                                <span class="font-semibold text-green-600">FREE</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Tax</span>
+                                <span id="checkoutTax" class="font-semibold">$0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between mb-6">
+                            <span class="text-xl font-semibold">Total</span>
+                            <span id="checkoutTotal" class="text-2xl font-bold text-primary-600">$0.00</span>
+                        </div>
+
+                        <div class="space-y-3 text-sm text-gray-600">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-check text-green-600"></i>
+                                <span>Free shipping on orders $50+</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-check text-green-600"></i>
+                                <span>30-day return policy</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-check text-green-600"></i>
+                                <span>Secure checkout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">&copy; 2025 LuminaSkin. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // Load checkout summary
+        function loadCheckoutSummary() {
+            const itemsContainer = document.getElementById('checkoutItems');
+            const subtotalEl = document.getElementById('checkoutSubtotal');
+            const taxEl = document.getElementById('checkoutTax');
+            const totalEl = document.getElementById('checkoutTotal');
+
+            if (cart.items.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+
+            const subtotal = cart.getTotal();
+            const tax = subtotal * 0.08;
+            const total = subtotal + tax;
+
+            itemsContainer.innerHTML = cart.items.map(item => `
+                <div class="flex gap-3">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
+                    <div class="flex-1">
+                        <p class="font-medium text-sm">${item.name}</p>
+                        <p class="text-xs text-gray-600">${item.size} × ${item.quantity}</p>
+                    </div>
+                    <span class="font-semibold text-sm">$${(item.price * item.quantity).toFixed(2)}</span>
+                </div>
+            `).join('');
+
+            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+            taxEl.textContent = `$${tax.toFixed(2)}`;
+            totalEl.textContent = `$${total.toFixed(2)}`;
+        }
+
+        function placeOrder() {
+            alert('Order placed successfully!\\n\\nIn production, this would:\\n1. Process payment via Stripe\\n2. Create order in database\\n3. Send confirmation email\\n4. Redirect to order confirmation page\\n\\nThank you for shopping with LuminaSkin!');
+            
+            // Track purchase
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'purchase', {
+                    transaction_id: 'ORD-' + Date.now(),
+                    value: cart.getTotal(),
+                    currency: 'USD',
+                    items: cart.items.map(item => ({
+                        item_id: item.productId,
+                        item_name: item.name,
+                        price: item.price,
+                        quantity: item.quantity
+                    }))
+                });
+            }
+
+            // Clear cart and redirect
+            cart.clearCart();
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCheckoutSummary();
+        });
+    </script>
+</body>
+</html>
