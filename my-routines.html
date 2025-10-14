@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Routines | LuminaSkin</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#fdf8f6', 100: '#f8ede8', 200: '#f0d9cf', 300: '#e4bbab', 400: '#d49481', 500: '#c6765f', 600: '#b15d47', 700: '#944b3c', 800: '#7a4036', 900: '#65382f' },
+                        cream: '#faf8f5',
+                        sage: '#b8c5b0',
+                        blush: '#f4e5e0',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-cream font-sans">
+    
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-spa text-white text-lg"></i>
+                    </div>
+                    <span class="font-serif text-2xl font-semibold text-gray-900">LuminaSkin</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary-600 transition font-medium">Home</a>
+                    <a href="shop.html" class="text-gray-700 hover:text-primary-600 transition font-medium">Shop</a>
+                    <div class="relative group">
+                        <button class="text-primary-600 font-semibold flex items-center">
+                            Routines <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            <a href="routine-builder.html" class="block px-4 py-3 hover:bg-blush transition">Routine Builder</a>
+                            <a href="my-routines.html" class="block px-4 py-3 bg-blush font-medium text-primary-600 transition">My Routines</a>
+                        </div>
+                    </div>
+                    <a href="blog.html" class="text-gray-700 hover:text-primary-600 transition font-medium">Blog</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary-600 transition font-medium">About</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="account.html" class="text-gray-700 hover:text-primary-600 transition hidden sm:block"><i class="fas fa-user text-lg"></i></a>
+                    <button id="cartToggle" class="relative text-gray-700 hover:text-primary-600 transition">
+                        <i class="fas fa-shopping-bag text-lg"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-primary-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h1 class="font-serif text-4xl md:text-5xl font-semibold text-gray-900 mb-4">My Saved Routines</h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Your personalized skincare regimens for morning and night, all in one place.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div id="routinesContainer">
+                    <div class="tabs mb-8">
+                        <button class="tab active" data-target="dailyRoutine">Daily Radiance Routine</button>
+                        <button class="tab" data-target="weeklyRoutine">Weekly Reset Routine</button>
+                    </div>
+
+                    <div id="routinesContent">
+                        <div id="dailyRoutine" class="routine-panel bg-white p-6 sm:p-8 rounded-2xl shadow-sm">
+                           <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-4">
+                                <div>
+                                    <h2 class="font-serif text-2xl font-semibold">Daily Radiance Routine</h2>
+                                    <p class="text-gray-600">For dry skin focused on hydration and anti-aging.</p>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button onclick="addAllToCart()" class="btn btn-primary"><i class="fas fa-shopping-bag mr-2"></i>Add all to Cart</button>
+                                    <a href="routine-builder.html" class="btn btn-secondary">Edit</a>
+                                </div>
+                           </div>
+
+                           <div class="space-y-6">
+                               <div>
+                                   <h3 class="font-semibold text-xl mb-4 text-gray-800">Morning Routine ☀️</h3>
+                                   <div class="space-y-4 divide-y divide-gray-100">
+                                       <div class="flex items-start sm:items-center gap-4 pt-4 first:pt-0">
+                                           <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEwfHxza2luY2FyZSUyMGJvdHRsZXxlbnwwfHx8fDE2NTg4MjE1NTc&ixlib=rb-1.2.1&q=80&w=400" alt="Cleanser" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
+                                           <div>
+                                               <h4 class="font-semibold text-gray-900">1. Gentle Hydrating Cleanser</h4>
+                                               <p class="text-sm text-gray-600">Start your day by washing away impurities without stripping your skin.</p>
+                                           </div>
+                                       </div>
+                                       <div class="flex items-start sm:items-center gap-4 pt-4">
+                                           <img src="https://images.unsplash.com/photo-1620916566398-39f168a5305b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDV8fHNlcnVtJTIwYm90dGxlfGVufDB8fHx8MTY1ODgyMTU3OQ&ixlib=rb-1.2.1&q=80&w=400" alt="Serum" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
+                                           <div>
+                                               <h4 class="font-semibold text-gray-900">2. Vitamin C Serum</h4>
+                                               <p class="text-sm text-gray-600">A powerful antioxidant to protect, brighten, and firm your skin.</p>
+                                           </div>
+                                       </div>
+                                       <div class="flex items-start sm:items-center gap-4 pt-4">
+                                           <img src="https://images.unsplash.com/photo-1600851433939-1419a5893e43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDIyfHxtb2lzdHVyaXplciUyMGNyZWFtfGVufDB8fHx8MTY1ODgyMTYxMg&ixlib=rb-1.2.1&q=80&w=400" alt="Moisturizer" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
+                                           <div>
+                                               <h4 class="font-semibold text-gray-900">3. Daily Hydration Cream</h4>
+                                               <p class="text-sm text-gray-600">Lock in moisture and keep your skin supple throughout the day.</p>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+
+                               <div class="pt-6 border-t border-gray-200">
+                                   <h3 class="font-semibold text-xl mb-4 text-gray-800">Evening Routine 🌙</h3>
+                                   <div class="space-y-4 divide-y divide-gray-100">
+                                       <div class="flex items-start sm:items-center gap-4 pt-4 first:pt-0">
+                                           <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEyfHxtYWtldXAlMjByZW1vdmVyfGVufDB8fHx8MTY1ODgyMTY4MA&ixlib=rb-1.2.1&q=80&w=400" alt="Oil Cleanser" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
+                                           <div>
+                                               <h4 class="font-semibold text-gray-900">1. Purifying Oil Cleanser</h4>
+                                               <p class="text-sm text-gray-600">Melt away makeup, sunscreen, and impurities from the day.</p>
+                                           </div>
+                                       </div>
+                                       <div class="flex items-start sm:items-center gap-4 pt-4">
+                                           <img src="https://images.unsplash.com/photo-1613688270382-2708bf507c62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDE0fHxza2luY2FyZSUyMHNlcnVtfGVufDB8fHx8MTY1ODgyMTcwNA&ixlib=rb-1.2.1&q=80&w=400" alt="Retinol" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
+                                           <div>
+                                               <h4 class="font-semibold text-gray-900">2. Retinol Renewal Serum</h4>
+                                               <p class="text-sm text-gray-600">Targets fine lines and improves skin texture while you sleep.</p>
+                                           </div>
+                                       </div>
+                                       <div class="flex items-start sm:items-center gap-4 pt-4">
+                                           <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fG5pZ2h0JTIwY3JlYW18ZW58MHx8fHwxNjU4ODIxNzIz&ixlib=rb-1.2.1&q=80&w=400" alt="Night Cream" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
+                                           <div>
+                                               <h4 class="font-semibold text-gray-900">3. Restorative Night Cream</h4>
+                                               <p class="text-sm text-gray-600">Repairs and deeply moisturizes your skin overnight.</p>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+
+                        <div id="weeklyRoutine" class="routine-panel hidden bg-white p-8 rounded-2xl shadow-sm">
+                            <h2 class="font-serif text-2xl font-semibold mb-4">Weekly Reset Routine</h2>
+                            <p class="text-gray-600">Coming soon! Check back later for more specialized routines.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="emptyState" class="hidden">
+                     <div class="empty-state bg-white rounded-2xl shadow-sm">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl font-semibold mt-4 mb-2">No Routines Yet</h2>
+                        <p class="text-gray-600 mb-6 max-w-sm mx-auto">You haven't created any routines. Let's build the perfect regimen for your skin.</p>
+                        <a href="routine-builder.html" class="btn btn-primary">
+                            Build Your First Routine
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">&copy; 2025 LuminaSkin. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300">
+        <div class="h-full flex flex-col">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="font-serif text-2xl font-semibold">Shopping Cart</h3>
+                <button id="cartClose" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cartItems" class="flex-1 overflow-y-auto p-6"></div>
+            
+            <div class="p-6 border-t bg-gray-50">
+                <div class="flex justify-between mb-4 text-lg font-semibold">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <a href="checkout.html" class="block w-full py-3 bg-primary-600 text-white text-center rounded-lg font-medium hover:bg-primary-700 transition">
+                    Checkout
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="cartOverlay" class="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300"></div>
+    
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // This is a placeholder for logic that would check if a user has saved routines.
+            const hasRoutines = true; // Set to `false` to see the empty state.
+
+            const routinesContainer = document.getElementById('routinesContainer');
+            const emptyState = document.getElementById('emptyState');
+
+            if (hasRoutines) {
+                routinesContainer.style.display = 'block';
+                emptyState.style.display = 'none';
+            } else {
+                routinesContainer.style.display = 'none';
+                emptyState.style.display = 'block';
+            }
+
+            // Tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            const panels = document.querySelectorAll('.routine-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Deactivate all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // Hide all panels
+                    panels.forEach(p => p.classList.add('hidden'));
+
+                    // Activate clicked tab
+                    tab.classList.add('active');
+                    // Show target panel
+                    const targetPanel = document.getElementById(tab.dataset.target);
+                    if (targetPanel) {
+                        targetPanel.classList.remove('hidden');
+                    }
+                });
+            });
+        });
+
+        function addAllToCart() {
+            // This is a simulation. In a real app, you'd loop through product IDs and add them.
+            if (window.cart && typeof window.cart.showToast === 'function') {
+                cart.showToast('Routine products added to cart!', 'success');
+                cart.openCart(); // Optionally open the cart sidebar
+            }
+        }
+    </script>
+</body>
+</html>

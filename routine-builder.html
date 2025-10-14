@@ -66,49 +66,131 @@
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">Create a personalized skincare routine tailored to your skin type and concerns</p>
             </div>
 
-            <!-- Routine Builder Steps -->
             <div class="max-w-4xl mx-auto">
-                <div class="progress-steps">
-                    <div class="progress-step active">
-                        <div class="progress-step-circle">1</div>
+                <div class="progress-steps" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div class="progress-step active" style="text-align: center;">
+                        <div class="progress-step-circle" style="width: 40px; height: 40px; border-radius: 50%; background-color: #b15d47; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; margin: 0 auto;">1</div>
                         <span class="text-sm mt-2 font-medium">Skin Type</span>
                     </div>
-                    <div class="progress-step">
-                        <div class="progress-step-circle">2</div>
+                    <div class="progress-step" style="text-align: center;">
+                        <div class="progress-step-circle" style="width: 40px; height: 40px; border-radius: 50%; background-color: #e5e7eb; color: #6b7280; display: flex; justify-content: center; align-items: center; font-weight: bold; margin: 0 auto;">2</div>
                         <span class="text-sm mt-2">Concerns</span>
                     </div>
-                    <div class="progress-step">
-                        <div class="progress-step-circle">3</div>
+                    <div class="progress-step" style="text-align: center;">
+                        <div class="progress-step-circle" style="width: 40px; height: 40px; border-radius: 50%; background-color: #e5e7eb; color: #6b7280; display: flex; justify-content: center; align-items: center; font-weight: bold; margin: 0 auto;">3</div>
                         <span class="text-sm mt-2">Routine</span>
                     </div>
                 </div>
 
-                <!-- Step Content -->
                 <div id="stepContent" class="bg-white rounded-2xl p-8 shadow-sm">
-                    <!-- Step 1: Skin Type Selection -->
                     <div id="step1">
                         <h2 class="font-serif text-2xl font-semibold mb-6">What's your skin type?</h2>
                         <div class="grid md:grid-cols-2 gap-4">
-                            <button onclick="selectSkinType('dry')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
+                            <button onclick="selectOption(this)" data-value="dry" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
                                 <i class="fas fa-tint text-3xl text-blue-600 mb-3"></i>
                                 <h3 class="font-semibold text-lg mb-2">Dry Skin</h3>
                                 <p class="text-sm text-gray-600">Feels tight, flaky, or rough</p>
                             </button>
-                            <button onclick="selectSkinType('oily')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
+                            <button onclick="selectOption(this)" data-value="oily" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
                                 <i class="fas fa-droplet text-3xl text-yellow-600 mb-3"></i>
                                 <h3 class="font-semibold text-lg mb-2">Oily Skin</h3>
                                 <p class="text-sm text-gray-600">Shiny, with visible pores</p>
                             </button>
-                            <button onclick="selectSkinType('combination')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
+                            <button onclick="selectOption(this)" data-value="combination" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
                                 <i class="fas fa-water text-3xl text-green-600 mb-3"></i>
                                 <h3 class="font-semibold text-lg mb-2">Combination</h3>
                                 <p class="text-sm text-gray-600">Oily T-zone, dry cheeks</p>
                             </button>
-                            <button onclick="selectSkinType('sensitive')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
+                            <button onclick="selectOption(this)" data-value="sensitive" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
                                 <i class="fas fa-heart text-3xl text-red-600 mb-3"></i>
                                 <h3 class="font-semibold text-lg mb-2">Sensitive</h3>
                                 <p class="text-sm text-gray-600">Prone to redness and irritation</p>
                             </button>
+                        </div>
+                        <div class="text-right mt-6">
+                            <button onclick="nextStep()" class="px-6 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition">Next</button>
+                        </div>
+                    </div>
+                    <div id="step2" style="display:none;">
+                        <h2 class="font-serif text-2xl font-semibold mb-6">What are your main concerns?</h2>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <button onclick="selectOption(this, true)" data-value="acne" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
+                                <h3 class="font-semibold text-lg">Acne & Blemishes</h3>
+                            </button>
+                            <button onclick="selectOption(this, true)" data-value="aging" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
+                                <h3 class="font-semibold text-lg">Fine Lines & Wrinkles</h3>
+                            </button>
+                            <button onclick="selectOption(this, true)" data-value="pigmentation" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
+                                <h3 class="font-semibold text-lg">Dark Spots & Hyperpigmentation</h3>
+                            </button>
+                            <button onclick="selectOption(this, true)" data-value="dryness" class="p-6 border-2 border-gray-200 rounded-xl hover:border-primary-600 transition text-left">
+                                <h3 class="font-semibold text-lg">Dryness & Dehydration</h3>
+                            </button>
+                        </div>
+                        <div class="flex justify-between mt-6">
+                           <button onclick="prevStep()" class="px-6 py-2 bg-gray-300 text-gray-800 rounded-lg font-medium hover:bg-gray-400 transition">Back</button>
+                           <button onclick="nextStep()" class="px-6 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition">Next</button>
+                        </div>
+                    </div>
+                    <div id="step3" style="display:none;">
+                        <h2 class="font-serif text-2xl font-semibold mb-6">Your Personalized Routine</h2>
+                        <div class="divide-y divide-gray-200">
+                           <div class="py-6">
+                              <h3 class="font-semibold text-xl mb-4">Morning Routine ☀️</h3>
+                              <div class="space-y-4">
+                                 <div class="flex items-center space-x-4">
+                                    <img src="https://via.placeholder.com/80" alt="Cleanser" class="w-20 h-20 rounded-lg object-cover">
+                                    <div>
+                                       <h4 class="font-semibold">Gentle Hydrating Cleanser</h4>
+                                       <p class="text-sm text-gray-600">Start your day by washing away impurities without stripping your skin.</p>
+                                    </div>
+                                 </div>
+                                 <div class="flex items-center space-x-4">
+                                    <img src="https://via.placeholder.com/80" alt="Serum" class="w-20 h-20 rounded-lg object-cover">
+                                    <div>
+                                       <h4 class="font-semibold">Vitamin C Serum</h4>
+                                       <p class="text-sm text-gray-600">A powerful antioxidant to protect and brighten your skin.</p>
+                                    </div>
+                                 </div>
+                                  <div class="flex items-center space-x-4">
+                                    <img src="https://via.placeholder.com/80" alt="Moisturizer" class="w-20 h-20 rounded-lg object-cover">
+                                    <div>
+                                       <h4 class="font-semibold">Daily Moisturizer</h4>
+                                       <p class="text-sm text-gray-600">Hydrates and nourishes your skin throughout the day.</p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="py-6">
+                              <h3 class="font-semibold text-xl mb-4">Evening Routine 🌙</h3>
+                              <div class="space-y-4">
+                                 <div class="flex items-center space-x-4">
+                                    <img src="https://via.placeholder.com/80" alt="Cleanser" class="w-20 h-20 rounded-lg object-cover">
+                                    <div>
+                                       <h4 class="font-semibold">Purifying Oil Cleanser</h4>
+                                       <p class="text-sm text-gray-600">Melt away makeup and sunscreen from the day.</p>
+                                    </div>
+                                 </div>
+                                 <div class="flex items-center space-x-4">
+                                    <img src="https://via.placeholder.com/80" alt="Exfoliant" class="w-20 h-20 rounded-lg object-cover">
+                                    <div>
+                                       <h4 class="font-semibold">Glycolic Acid Exfoliating Toner</h4>
+                                       <p class="text-sm text-gray-600">Gently exfoliates to reveal smoother, brighter skin.</p>
+                                    </div>
+                                 </div>
+                                  <div class="flex items-center space-x-4">
+                                    <img src="https://via.placeholder.com/80" alt="Night Cream" class="w-20 h-20 rounded-lg object-cover">
+                                    <div>
+                                       <h4 class="font-semibold">Restorative Night Cream</h4>
+                                       <p class="text-sm text-gray-600">Repairs and deeply moisturizes while you sleep.</p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                         <div class="flex justify-between mt-6">
+                           <button onclick="prevStep()" class="px-6 py-2 bg-gray-300 text-gray-800 rounded-lg font-medium hover:bg-gray-400 transition">Back</button>
+                           <button onclick="startOver()" class="px-6 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition">Start Over</button>
                         </div>
                     </div>
                 </div>
@@ -151,8 +233,66 @@
     <script src="js/data.js"></script>
     <script src="js/cart.js"></script>
     <script>
-        function selectSkinType(type) {
-            alert('Skin type selected: ' + type + '\\n\\nRoutine builder functionality coming soon! This will provide personalized product recommendations based on your selections.');
+        let currentStep = 1;
+        const routineSelections = {
+            skinType: null,
+            concerns: []
+        };
+
+        function selectOption(element, isMultiple = false) {
+            const parent = element.parentElement;
+            const value = element.dataset.value;
+
+            if (isMultiple) {
+                element.classList.toggle('border-primary-600');
+                if (routineSelections.concerns.includes(value)) {
+                    routineSelections.concerns = routineSelections.concerns.filter(item => item !== value);
+                } else {
+                    routineSelections.concerns.push(value);
+                }
+            } else {
+                parent.querySelectorAll('button').forEach(btn => btn.classList.remove('border-primary-600'));
+                element.classList.add('border-primary-600');
+                routineSelections.skinType = value;
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < 3) {
+                document.getElementById(`step${currentStep}`).style.display = 'none';
+                currentStep++;
+                document.getElementById(`step${currentStep}`).style.display = 'block';
+                updateProgress();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                document.getElementById(`step${currentStep}`).style.display = 'none';
+                currentStep--;
+                document.getElementById(`step${currentStep}`).style.display = 'block';
+                updateProgress();
+            }
+        }
+        
+        function startOver() {
+            location.reload();
+        }
+
+        function updateProgress() {
+            const steps = document.querySelectorAll('.progress-step');
+            steps.forEach((step, index) => {
+                const circle = step.querySelector('.progress-step-circle');
+                if (index < currentStep) {
+                    step.classList.add('active');
+                     circle.style.backgroundColor = '#b15d47';
+                     circle.style.color = 'white';
+                } else {
+                    step.classList.remove('active');
+                    circle.style.backgroundColor = '#e5e7eb';
+                    circle.style.color = '#6b7280';
+                }
+            });
         }
     </script>
 </body>
