@@ -81,10 +81,10 @@ const productsData = [
         concerns: ["dark-spots", "dull-skin", "uneven-tone", "aging"],
         featured: true,
         bestseller: true,
-        image: "https://images.unsplash.com/photo-1556228852-80ba42dcf77a?w=800",
+        image: "download.jpg",
         images: [
-            "https://images.unsplash.com/photo-1556228852-80ba42dcf77a?w=800",
-            "https://images.unsplash.com/photo-1570554886111-e80fcca6a029?w=800"
+            "download.jpg",
+            "download.jpg"
         ],
         variants: [
             { id: "2-50ml", size: "50ml", price: 65.00, salePrice: 52.00, inStock: true }
@@ -128,7 +128,7 @@ const productsData = [
         concerns: ["aging", "fine-lines", "wrinkles", "texture"],
         featured: true,
         bestseller: false,
-        image: "https://images.unsplash.com/photo-1620916297397-fd5872c88a18?w=800",
+        image: "download%20(1).jpg",
         images: [
             "https://images.unsplash.com/photo-1620916297397-fd5872c88a18?w=800",
             "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800"
@@ -316,16 +316,16 @@ const productsData = [
         concerns: ["texture", "dull-skin", "large-pores", "uneven-tone"],
         featured: false,
         bestseller: false,
-        image: "https://images.unsplash.com/photo-1608248597631-c1b6d2a0c66e?w=800",
+        image: "download%20(2).jpg",
         images: [
-            "https://images.unsplash.com/photo-1608248597631-c1b6d2a0c66e?w=800"
+            "download%20(2).jpg"
         ],
         variants: [
             { id: "7-120ml", size: "120ml", price: 38.00, inStock: true }
         ],
         model3d: {
             url: "models/toner-bottle.glb",
-            fallbackImage: "https://images.unsplash.com/photo-1608248597631-c1b6d2a0c66e?w=800"
+            fallbackImage: "download%20(2).jpg"
         },
         stock: 167,
         new: true
