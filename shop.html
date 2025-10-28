@@ -6,16 +6,12 @@
     <meta name="description" content="Shop premium skincare products. Serums, moisturizers, cleansers, and more with 3D visualization.">
     <title>Shop | LuminaSkin</title>
     
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -39,7 +35,6 @@
 </head>
 <body class="bg-cream">
     
-    <!-- Navigation (Same as index.html) -->
     <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -87,7 +82,6 @@
         </div>
     </nav>
 
-    <!-- Search Overlay -->
     <div id="searchOverlay" class="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300">
         <div class="container mx-auto px-4 pt-24">
             <div class="max-w-3xl mx-auto">
@@ -107,40 +101,34 @@
 
     <div class="pt-24 pb-16">
         <div class="container mx-auto px-4">
-            <!-- Page Header -->
             <div class="text-center mb-12">
                 <h1 class="font-serif text-4xl md:text-5xl font-semibold text-gray-900 mb-4">Shop All Products</h1>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">Discover our complete collection of science-backed skincare formulations</p>
             </div>
 
             <div class="grid lg:grid-cols-4 gap-8">
-                <!-- Filters Sidebar -->
-                <aside class="lg:col-span-1">
+                <aside id="filterSidebar" class="hidden lg:block lg:col-span-1">
                     <div class="bg-white rounded-2xl p-6 shadow-sm sticky top-24">
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="font-serif text-2xl font-semibold">Filters</h2>
                             <button onclick="clearFilters()" class="text-sm text-primary-600 hover:text-primary-700">Clear All</button>
                         </div>
 
-                        <!-- Category Filter -->
                         <div class="filter-group">
                             <h3 class="font-semibold mb-3">Category</h3>
                             <div id="categoryFilters" class="space-y-2"></div>
                         </div>
 
-                        <!-- Skin Type Filter -->
                         <div class="filter-group">
                             <h3 class="font-semibold mb-3">Skin Type</h3>
                             <div id="skinTypeFilters" class="space-y-2"></div>
                         </div>
 
-                        <!-- Concern Filter -->
                         <div class="filter-group">
                             <h3 class="font-semibold mb-3">Skin Concern</h3>
                             <div id="concernFilters" class="space-y-2"></div>
                         </div>
 
-                        <!-- Price Range Filter -->
                         <div class="filter-group">
                             <h3 class="font-semibold mb-3">Price Range</h3>
                             <div class="space-y-4">
@@ -152,7 +140,6 @@
                             </div>
                         </div>
 
-                        <!-- Special Filters -->
                         <div class="filter-group">
                             <h3 class="font-semibold mb-3">Special</h3>
                             <div class="space-y-2">
@@ -178,10 +165,15 @@
                         </div>
                     </div>
                 </aside>
+                
+                <div class="mb-6 lg:hidden">
+                    <button id="filterToggleBtn" class="flex items-center justify-center gap-2 w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-lg font-medium shadow-sm">
+                        <i class="fas fa-filter text-sm"></i>
+                        <span>Show Filters</span>
+                    </button>
+                </div>
 
-                <!-- Products Grid -->
                 <main class="lg:col-span-3">
-                    <!-- Toolbar -->
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                         <div class="flex items-center gap-4">
                             <button onclick="toggleView('grid')" id="gridViewBtn" class="p-2 text-primary-600 border-b-2 border-primary-600">
@@ -203,12 +195,9 @@
                         </select>
                     </div>
 
-                    <!-- Products Container -->
                     <div id="productsContainer" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-                        <!-- Products loaded dynamically -->
-                    </div>
+                        </div>
 
-                    <!-- No Results -->
                     <div id="noResults" class="hidden">
                         <div class="empty-state">
                             <div class="empty-state-icon">
@@ -224,7 +213,6 @@
         </div>
     </div>
 
-    <!-- Footer (Same as index.html) -->
     <footer class="bg-gray-900 text-white py-16">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
@@ -271,7 +259,6 @@
         </div>
     </footer>
 
-    <!-- Cart Sidebar -->
     <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300">
         <div class="h-full flex flex-col">
             <div class="p-6 border-b flex justify-between items-center">

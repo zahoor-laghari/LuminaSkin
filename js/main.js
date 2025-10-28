@@ -78,7 +78,6 @@ function createProductCard(product) {
                 ${product.new ? '<span class="badge badge-new absolute top-4 left-4">New</span>' : ''}
                 ${hasDiscount ? '<span class="badge badge-sale absolute top-4 right-4">Sale</span>' : ''}
                 
-                <!-- Quick View Overlay -->
                 <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <button onclick="openQuickView(${product.id}); event.preventDefault();" 
                             class="px-6 py-3 bg-white text-gray-900 rounded-full font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform">
@@ -93,7 +92,6 @@ function createProductCard(product) {
                 </a>
                 <p class="text-sm text-gray-600 mb-3 line-clamp-2">${product.shortDescription}</p>
                 
-                <!-- Rating -->
                 <div class="flex items-center gap-2 mb-3">
                     <div class="star-rating">
                         ${generateStars(product.rating)}
@@ -101,7 +99,6 @@ function createProductCard(product) {
                     <span class="text-sm text-gray-500">(${product.reviewCount})</span>
                 </div>
                 
-                <!-- Price -->
                 <div class="flex items-center justify-between">
                     <div>
                         ${hasDiscount ? `
@@ -169,12 +166,10 @@ function createQuickViewModal(product) {
     modalOverlay.innerHTML = `
         <div class="modal p-0 max-w-4xl">
             <div class="grid md:grid-cols-2 gap-6">
-                <!-- Product Image -->
                 <div class="relative bg-cream rounded-l-2xl p-8">
                     <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain">
                 </div>
                 
-                <!-- Product Info -->
                 <div class="p-8">
                     <button onclick="this.closest('.modal-overlay').remove()" 
                             class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 w-8 h-8">
@@ -184,7 +179,6 @@ function createQuickViewModal(product) {
                     <h2 class="font-serif text-3xl font-semibold mb-2">${product.name}</h2>
                     <p class="text-gray-600 mb-4">${product.shortDescription}</p>
                     
-                    <!-- Rating -->
                     <div class="flex items-center gap-2 mb-4">
                         <div class="star-rating">
                             ${generateStars(product.rating)}
@@ -192,7 +186,6 @@ function createQuickViewModal(product) {
                         <span class="text-sm text-gray-500">(${product.reviewCount} reviews)</span>
                     </div>
                     
-                    <!-- Price -->
                     <div class="mb-6">
                         ${product.variants[0].salePrice ? `
                             <span class="text-3xl font-bold text-primary-600">$${product.variants[0].salePrice.toFixed(2)}</span>
@@ -202,7 +195,6 @@ function createQuickViewModal(product) {
                         `}
                     </div>
                     
-                    <!-- Variants -->
                     ${product.variants.length > 1 ? `
                         <div class="mb-6">
                             <label class="block text-sm font-semibold mb-2">Size</label>
@@ -217,7 +209,6 @@ function createQuickViewModal(product) {
                         </div>
                     ` : ''}
                     
-                    <!-- Benefits -->
                     <div class="mb-6">
                         <h4 class="font-semibold mb-2">Key Benefits</h4>
                         <ul class="space-y-1 text-sm text-gray-600">
@@ -230,7 +221,6 @@ function createQuickViewModal(product) {
                         </ul>
                     </div>
                     
-                    <!-- Actions -->
                     <div class="flex gap-3">
                         <button onclick="addToCartQuick(${product.id}); this.closest('.modal-overlay').remove();" 
                                 class="flex-1 btn btn-primary">
@@ -351,6 +341,29 @@ document.addEventListener('DOMContentLoaded', () => {
             page_path: window.location.pathname
         });
     }
+
+    // --- NEW CODE ADDED ---
+    // Shop page mobile filter toggle
+    const filterToggleBtn = document.getElementById('filterToggleBtn');
+    const filterSidebar = document.getElementById('filterSidebar');
+
+    if (filterToggleBtn && filterSidebar) {
+        
+        filterToggleBtn.addEventListener('click', () => {
+            
+            filterSidebar.classList.toggle('hidden');
+
+            // Optional: Change the button text when clicked
+            if (filterSidebar.classList.contains('hidden')) {
+                // Filters are now hidden
+                filterToggleBtn.innerHTML = '<i class="fas fa-filter text-sm"></i> <span>Show Filters</span>';
+            } else {
+                // Filters are now visible
+                filterToggleBtn.innerHTML = '<i class="fas fa-times text-sm"></i> <span>Hide Filters</span>';
+            }
+        });
+    }
+    // --- END OF NEW CODE ---
 });
 
 // Smooth scroll for anchor links
